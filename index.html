@@ -126,7 +126,23 @@
     .job .where { font-weight: 600; margin-bottom: .6rem; }
     .job ul { margin: 0; padding-left: 1.1rem; max-width: 65ch; }
     .job li { margin-bottom: .35rem; }
-
+/* Skill bubbles */
+.skill-bubbles {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+.skill-bubbles li {
+  background: var(--tag-bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;      /* makes the rounded bubble shape */
+  padding: .3rem .95rem;
+  font-size: .95rem;
+  font-weight: 500;
+}
     /* Tablet and phone */
     @media (max-width: 900px) {
       .page { flex-direction: column !important; }
@@ -174,14 +190,21 @@
       <section id="about">
         <h2>About</h2>
         <!-- ✏️ EDIT: a short intro. Add more <p> tags for more paragraphs. -->
-        <p>
-          I'm a developer who likes turning messy problems into simple, reliable software.
-          I've worked on web apps, APIs and developer tools, and I care about code that
-          is easy to read and easy to change.
-        </p>
-        <p>
-          Outside of work I contribute to open source and tinker with side projects.
-        </p>
+        <!-- ✏️ EDIT: the heading above your skill bubbles -->
+  <h3>Skills</h3>
+
+  <!-- ✏️ EDIT: one <li> per skill. Copy a line to add a bubble, delete a line to remove one. -->
+  <ul class="skill-bubbles">
+    <li>SolidWorks</li>
+    <li>ABAQUS</li>
+    <li>AutoCAD</li>
+    <li>Python</li>
+    <li>Welding</li>
+    <li>3D Printing</li>
+    <li>Prototyping</li>
+    <li>Soldering</li>
+  </ul>
+</section>
       </section>
 
       <!-- ========================================================
