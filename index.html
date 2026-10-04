@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✏️ EDIT: the text shown in the browser tab and in search results -->
+  <title>Your Name – Software Developer</title>
+  <meta name="description" content="Portfolio of Your Name: projects and experience.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================
+       1. COLORS & FONTS  (✏️ EDIT to restyle the whole site)
+       ========================================================== */
+    :root {
+      --bg:      #eef2f4;   /* page background */
+      --ink:     #14202b;   /* main text */
+      --muted:   #5b6b78;   /* secondary text */
+      --line:    #c9d3da;   /* borders and dividers */
+      --accent:  #2b4eff;   /* links and highlights */
+      --tag-bg:  #dde5ea;   /* project tag background */
+
+      --font-heading: "Bricolage Grotesque", system-ui, sans-serif;
+      --font-body:    "Figtree", system-ui, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f171e; --ink: #e8eef2; --muted: #93a3af;
+        --line: #26343f; --accent: #7e95ff; --tag-bg: #1b2833;
+      }
+    }
+
+    /* ==========================================================
+       2. LAYOUT SETTINGS  (✏️ EDIT to rearrange the page)
+       ========================================================== */
+
+    /* Which side is the intro panel on?
+       "row" = intro on the left, "row-reverse" = intro on the right */
+    .page { flex-direction: row; }
+
+    /* ORDER OF THE SECTIONS in the main column.
+       Lower number = higher on the page. Swap the numbers to reorder.
+       (Delete a whole <section> in the HTML to remove it.) */
+    #about      { order: 1; }
+    #projects   { order: 2; }
+    #experience { order: 3; }
+    #contact    { order: 4; }
+
+    /* How many project columns on wide screens: 1, 2 or 3 */
+    .project-list { --project-columns: 2; }
+
+    /* ==========================================================
+       3. STYLES  (you can leave everything below alone)
+       ========================================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 1.0625rem/1.6 var(--font-body);
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    h1, h2, h3 { font-family: var(--font-heading); line-height: 1.15; margin: 0; }
+    h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+    h3 { font-size: 1.15rem; }
+    p  { margin: 0 0 1rem; max-width: 65ch; }
+
+    .page {
+      display: flex;
+      gap: clamp(2rem, 6vw, 6rem);
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem);
+    }
+
+    /* Intro panel (stays in view while you scroll on desktop) */
+    .intro {
+      flex: 0 0 300px;
+      align-self: flex-start;
+      position: sticky;
+      top: clamp(1.5rem, 5vw, 4rem);
+    }
+    .intro h1 { font-size: clamp(2.4rem, 5vw, 3.2rem); margin-bottom: .75rem; }
+    .intro .role { color: var(--muted); margin-bottom: 1.5rem; }
+    .intro nav ul, .links { list-style: none; padding: 0; margin: 0; }
+    .intro nav { margin-bottom: 2rem; }
+    .intro nav a { display: inline-block; padding: .2rem 0; color: var(--ink); text-decoration: none; font-weight: 500; }
+    .intro nav a:hover { color: var(--accent); }
+    .links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+
+    /* Main column: sections stack and follow the order set above */
+    main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4rem; }
+    section { scroll-margin-top: 2rem; }
+
+    /* Projects */
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(var(--project-columns), minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .project {
+      padding: 1.5rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    .project p { color: var(--muted); font-size: 1rem; margin: 0; }
+    .project h3 a { color: var(--ink); text-decoration: none; }
+    .project h3 a:hover { color: var(--accent); text-decoration: underline; }
+    .tags { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; padding: 0; margin: auto 0 0; padding-top: .5rem; }
+    .tags li { background: var(--tag-bg); border-radius: 3px; padding: .1rem .55rem; font-size: .85rem; }
+
+    /* Experience timeline */
+    .job-list { border-left: 2px solid var(--line); padding-left: 1.75rem; display: grid; gap: 2.25rem; }
+    .job .when { color: var(--muted); font-size: .95rem; margin-bottom: .35rem; }
+    .job .where { font-weight: 600; margin-bottom: .6rem; }
+    .job ul { margin: 0; padding-left: 1.1rem; max-width: 65ch; }
+    .job li { margin-bottom: .35rem; }
+
+    /* Tablet and phone */
+    @media (max-width: 900px) {
+      .page { flex-direction: column !important; }
+      .intro { position: static; flex-basis: auto; }
+      .intro nav { display: none; }
+      .project-list { --project-columns: 1 !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ==========================================================
+         INTRO PANEL  (the name, role and links on the side)
+         ========================================================== -->
+    <header class="intro">
+      <!-- ✏️ EDIT: your name -->
+      <h1>Your Name</h1>
+      <!-- ✏️ EDIT: your job title or what you do -->
+      <p class="role">Software developer building tools for the web.</p>
+
+      <!-- Menu links. The part after # must match a section's id below.
+           ✏️ To remove a link, delete its <li>. -->
+      <nav aria-label="Sections">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- ✏️ EDIT: your links (replace the URLs, add or delete <li> lines) -->
+      <ul class="links">
+        <li><a href="https://github.com/your-username">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/your-name">LinkedIn</a></li>
+        <li><a href="/resume.pdf">Résumé</a></li>
+      </ul>
+    </header>
+
+    <main>
+
+      <!-- ========================================================
+           ABOUT SECTION
+           ======================================================== -->
+      <section id="about">
+        <h2>About</h2>
+        <!-- ✏️ EDIT: a short intro. Add more <p> tags for more paragraphs. -->
+        <p>
+          I'm a developer who likes turning messy problems into simple, reliable software.
+          I've worked on web apps, APIs and developer tools, and I care about code that
+          is easy to read and easy to change.
+        </p>
+        <p>
+          Outside of work I contribute to open source and tinker with side projects.
+        </p>
+      </section>
+
+      <!-- ========================================================
+           PROJECTS SECTION
+           To add a project: copy one whole <article class="project"> ... </article>
+           block and paste it below the last one.
+           To reorder projects: cut and paste the blocks.
+           ======================================================== -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-list">
+
+          <!-- ✏️ PROJECT 1 -->
+          <article class="project">
+            <h3><a href="https://github.com/your-username/project-one">Project One</a></h3>
+            <p>One or two sentences on what it does and why you built it.</p>
+            <ul class="tags">
+              <li>JavaScript</li>
+              <li>Node.js</li>
+            </ul>
+          </article>
+
+          <!-- ✏️ PROJECT 2 -->
+          <article class="project">
+            <h3><a href="https://github.com/your-username/project-two">Project Two</a></h3>
+            <p>Describe the problem it solves and what you learned building it.</p>
+            <ul class="tags">
+              <li>Python</li>
+              <li>Flask</li>
+              <li>PostgreSQL</li>
+            </ul>
+          </article>
+
+          <!-- ✏️ PROJECT 3 -->
+          <article class="project">
+            <h3><a href="https://github.com/your-username/project-three">Project Three</a></h3>
+            <p>Mention the result: users, stars, speed-ups, or anything you're proud of.</p>
+            <ul class="tags">
+              <li>React</li>
+              <li>TypeScript</li>
+            </ul>
+          </article>
+
+          <!-- ✏️ PROJECT 4 -->
+          <article class="project">
+            <h3><a href="https://github.com/your-username/project-four">Project Four</a></h3>
+            <p>Keep descriptions short so the grid stays tidy.</p>
+            <ul class="tags">
+              <li>Go</li>
+              <li>Docker</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           EXPERIENCE SECTION
+           To add a job: copy one whole <div class="job"> ... </div>
+           block. Put the newest job first.
+           ======================================================== -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="job-list">
+
+          <!-- ✏️ JOB 1 (most recent) -->
+          <div class="job">
+            <p class="when">2023 – Present</p>
+            <h3>Software Engineer</h3>
+            <p class="where">Company Name</p>
+            <ul>
+              <li>What you built or improved, with a number if you have one.</li>
+              <li>A second accomplishment or responsibility.</li>
+              <li>Tools and technologies you used.</li>
+            </ul>
+          </div>
+
+          <!-- ✏️ JOB 2 -->
+          <div class="job">
+            <p class="when">2021 – 2023</p>
+            <h3>Junior Developer</h3>
+            <p class="where">Another Company</p>
+            <ul>
+              <li>Shipped features for a product used by X people.</li>
+              <li>Fixed bugs and wrote tests to keep them fixed.</li>
+            </ul>
+          </div>
+
+          <!-- ✏️ JOB 3 (or delete this block, or education, internships, etc.) -->
+          <div class="job">
+            <p class="when">2020 – 2021</p>
+            <h3>Intern</h3>
+            <p class="where">First Company</p>
+            <ul>
+              <li>Short description of what you worked on.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           CONTACT SECTION
+           ======================================================== -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <!-- ✏️ EDIT: your email address (change it in both places) -->
+        <p>
+          Want to work together or just say hi?
+          Email me at <a href="mailto:you@example.com">you@example.com</a>.
+        </p>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
