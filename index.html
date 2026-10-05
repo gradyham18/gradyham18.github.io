@@ -84,13 +84,14 @@
 
     /* Intro panel (stays in view while you scroll on desktop) */
     .intro {
-      flex: 0 0 300px;
+      flex: 0 0 360px;
       align-self: flex-start;
       position: sticky;
       top: clamp(1.5rem, 5vw, 4rem);
     }
     .intro h1 { font-size: clamp(2.4rem, 5vw, 3.2rem); margin-bottom: .75rem; }
-    .intro .role { color: var(--muted); margin-bottom: 1.5rem; }
+    .intro .role { color: var(--muted); margin-bottom: 1.5rem; font-size: .95rem; }
+.role-line { display: block; white-space: nowrap; }   /* each line stays on one line */
     .intro nav ul, .links { list-style: none; padding: 0; margin: 0; }
     .intro nav { margin-bottom: 2rem; }
     .intro nav a { display: inline-block; padding: .2rem 0; color: var(--ink); text-decoration: none; font-weight: 500; }
@@ -197,8 +198,10 @@
       <!-- ✏️ EDIT: your name -->
       <h1>Grady Hamilton</h1>
       <!-- ✏️ EDIT: your job title or what you do -->
-      <p class="role">2026 Graduate from Montana State University
-                      Bachelor's degree in Mechanical Engineering </p>
+    <p class="role">
+  <span class="role-line">2026 Graduate from Montana State University</span>
+  <span class="role-line">Bachelor's degree in Mechanical Engineering</span>
+</p>
 
       <!-- Menu links. The part after # must match a section's id below.
            ✏️ To remove a link, delete its <li>. -->
