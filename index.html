@@ -127,6 +127,33 @@
   display: flex; flex-direction: column; gap: .75rem;
   flex: 1;
     }
+    /* Picture carousel */
+.carousel { position: relative; border-bottom: 1px solid var(--line); }
+.slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.slides::-webkit-scrollbar { display: none; }
+.slides img { flex: 0 0 100%; scroll-snap-align: start; border-bottom: 0; }
+.arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+.arrow.prev { left: .6rem; }
+.arrow.next { right: .6rem; }
+.arrow:hover { color: var(--accent); }
+.arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.counter {
+  position: absolute; bottom: .6rem; right: .6rem;
+  background: var(--bg); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 999px; padding: .1rem .6rem; font-size: .8rem;
+}
+@media (prefers-reduced-motion: reduce) { .slides { scroll-behavior: auto; } }
     .project p { color: var(--muted); font-size: 1rem; margin: 0; }
     .project h3 a { color: var(--ink); text-decoration: none; }
     .project h3 a:hover { color: var(--accent); text-decoration: underline; }
@@ -265,7 +292,17 @@
           <!-- ✏️ PROJECT 1 -->
 <article class="project">
   <!-- ✏️ EDIT: the picture's path, and a short description of it for screen readers -->
-  <img src="projectile.jpeg" alt="Short description of what the picture shows">
+  <div class="carousel">
+  <div class="slides">
+    <!-- ✏️ EDIT: one <img> per picture. Copy a line to add one, delete a line to remove one. -->
+    <img src="nosecone1.jpg" alt="Describe the first picture">
+    <img src="nosecone2.jpeg" alt="Describe the second picture">
+    <img src="projectile.jpeg" alt="Describe the third picture">
+  </div>
+  <button class="arrow prev" type="button" aria-label="Previous picture">&#8249;</button>
+  <button class="arrow next" type="button" aria-label="Next picture">&#8250;</button>
+  <span class="counter">1 / 3</span>
+</div>
 
   <div class="project-body">
     <h3><a href="https://github.com/your-username/project-one">Protoype Bunker-Buster Missile</a></h3>
@@ -325,5 +362,20 @@
 
     </main>
   </div>
+  <script>
+  // Picture carousels: works for every .carousel on the page
+  document.querySelectorAll('.carousel').forEach(function (c) {
+    var slides = c.querySelector('.slides');
+    var n = slides.querySelectorAll('img').length;
+    var prev = c.querySelector('.prev'), next = c.querySelector('.next');
+    var counter = c.querySelector('.counter');
+    if (n < 2) { prev.hidden = next.hidden = counter.hidden = true; return; }  // one picture: no arrows
+    function current() { return Math.round(slides.scrollLeft / slides.clientWidth); }
+    function go(step) { slides.scrollTo({ left: ((current() + step + n) % n) * slides.clientWidth }); }
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
+    slides.addEventListener('scroll', function () { counter.textContent = (current() + 1) + ' / ' + n; });
+  });
+</script>
 </body>
 </html>
