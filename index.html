@@ -200,6 +200,8 @@
   margin-bottom: 1.25rem;
 }
 .skill-bubbles { margin-top: 0; }
+    /* Stacks Skills and Interests in the right-hand column */
+.side-cards { display: grid; gap: 2.5rem; }
 
 /* Stack the two columns on tablet and phone */
 @media (max-width: 900px) {
@@ -265,18 +267,35 @@
     </div>
 
     <!-- ✏️ SKILLS: one <li> per bubble -->
-    <div class="skills-card">
-      <h2>Skills</h2>
-      <ul class="skill-bubbles">
-        <li>SolidWorks</li>
-        <li>ABAQUS</li>
-        <li>AutoCAD</li>
-        <li>Python</li>
-        <li>Welding</li>
-        <li>3D Printing</li>
-      </ul>
-    </div>
+   <div class="side-cards">
 
+  <!-- ✏️ SKILLS: one <li> per bubble -->
+  <div class="skills-card">
+    <h2>Skills</h2>
+    <ul class="skill-bubbles">
+      <li>SolidWorks</li>
+      <li>ABAQUS</li>
+      <li>AutoCAD</li>
+      <li>Python</li>
+      <li>Welding</li>
+      <li>3D Printing</li>
+    </ul>
+  </div>
+
+  <!-- ✏️ INTERESTS: one <li> per bubble -->
+  <div class="interests-card">
+    <h2>Interests</h2>
+    <ul class="skill-bubbles">
+      <li>Golf</li>
+      <li>Super Smash Brothers</li>
+      <li>Sustainability</li>
+      <li>3D Modeling</li>
+      <li>Vinyl</li>
+      <li>A Tidy Workspace</li>
+    </ul>
+  </div>
+
+</div>
   </div>
 </section>
       <!-- ========================================================
